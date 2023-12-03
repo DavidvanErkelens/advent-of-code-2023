@@ -11,3 +11,15 @@ func NewSlice(start, end, step int) []int {
 	}
 	return s
 }
+
+func Filter[T any](slice []T, filter func(T) bool) []T {
+	out := make([]T, 0)
+
+	for _, elem := range slice {
+		if filter(elem) {
+			out = append(out, elem)
+		}
+	}
+
+	return out
+}
