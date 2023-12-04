@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-func TestChallengeTwo_RunPartOne_ExampleInput(t *testing.T) {
+func TestChallenge02_RunPartOne_ExampleInput(t *testing.T) {
 	fr := filereader.InputFileReader()
-	challenge := NewChallengeTwo()
+	challenge := NewChallenge02()
 
 	if !fr.FileExists(challenge.DataFolder(), "example.in") {
 		t.Skip("Input file does not exist")
@@ -23,9 +23,9 @@ func TestChallengeTwo_RunPartOne_ExampleInput(t *testing.T) {
 	}
 }
 
-func TestChallengeTwo_RunPartOne_ChallengeInput(t *testing.T) {
+func TestChallenge02_RunPartOne_ChallengeInput(t *testing.T) {
 	fr := filereader.InputFileReader()
-	challenge := NewChallengeTwo()
+	challenge := NewChallenge02()
 
 	if !fr.FileExists(challenge.DataFolder(), "challenge.in") {
 		t.Skip("Input file does not exist")
@@ -41,9 +41,9 @@ func TestChallengeTwo_RunPartOne_ChallengeInput(t *testing.T) {
 	}
 }
 
-func TestChallengeTwo_RunPartTwo_ExampleInput(t *testing.T) {
+func TestChallenge02_RunPartTwo_ExampleInput(t *testing.T) {
 	fr := filereader.InputFileReader()
-	challenge := NewChallengeTwo()
+	challenge := NewChallenge02()
 
 	if !fr.FileExists(challenge.DataFolder(), "example.in") {
 		t.Skip("Input file does not exist")
@@ -59,9 +59,9 @@ func TestChallengeTwo_RunPartTwo_ExampleInput(t *testing.T) {
 	}
 }
 
-func TestChallengeTwo_RunPartTwo_ChallengeInput(t *testing.T) {
+func TestChallenge02_RunPartTwo_ChallengeInput(t *testing.T) {
 	fr := filereader.InputFileReader()
-	challenge := NewChallengeTwo()
+	challenge := NewChallenge02()
 
 	if !fr.FileExists(challenge.DataFolder(), "challenge.in") {
 		t.Skip("Input file does not exist")

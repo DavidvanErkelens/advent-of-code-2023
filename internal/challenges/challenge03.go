@@ -8,14 +8,14 @@ import (
 	"unicode"
 )
 
-func NewChallengeThree() ChallengeThree {
-	return ChallengeThree{}
+func NewChallenge03() Challenge03 {
+	return Challenge03{}
 }
 
-type ChallengeThree struct {
+type Challenge03 struct {
 }
 
-func (c ChallengeThree) RunPartOne(input string) string {
+func (c Challenge03) RunPartOne(input string) string {
 	grid := grid.NewRuneGrid(input)
 	partNumbers := make([]int, 0)
 
@@ -78,7 +78,7 @@ func (c ChallengeThree) RunPartOne(input string) string {
 	return strconv.Itoa(common.Sum(partNumbers))
 }
 
-func (c ChallengeThree) RunPartTwo(input string) string {
+func (c Challenge03) RunPartTwo(input string) string {
 	grid := grid.NewRuneGrid(input)
 	adjacentToGears := make(map[string][]int, 0)
 
@@ -153,6 +153,6 @@ func (c ChallengeThree) RunPartTwo(input string) string {
 	return strconv.Itoa(common.Sum(products))
 }
 
-func (c ChallengeThree) DataFolder() string {
+func (c Challenge03) DataFolder() string {
 	return "03"
 }

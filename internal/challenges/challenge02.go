@@ -6,8 +6,8 @@ import (
 	"strings"
 )
 
-func NewChallengeTwo() ChallengeTwo {
-	return ChallengeTwo{
+func NewChallenge02() Challenge02 {
+	return Challenge02{
 		limits: map[string]int{
 			"red":   12,
 			"green": 13,
@@ -16,11 +16,11 @@ func NewChallengeTwo() ChallengeTwo {
 	}
 }
 
-type ChallengeTwo struct {
+type Challenge02 struct {
 	limits map[string]int
 }
 
-func (c ChallengeTwo) RunPartOne(input string) string {
+func (c Challenge02) RunPartOne(input string) string {
 	games := common.SplitLines(input)
 	possibleGames := make([]int, 0)
 
@@ -59,7 +59,7 @@ func (c ChallengeTwo) RunPartOne(input string) string {
 	return strconv.Itoa(sum)
 }
 
-func (c ChallengeTwo) RunPartTwo(input string) string {
+func (c Challenge02) RunPartTwo(input string) string {
 	games := common.SplitLines(input)
 	powers := make([]int, 0)
 
@@ -95,6 +95,6 @@ func (c ChallengeTwo) RunPartTwo(input string) string {
 	return strconv.Itoa(common.Sum(powers))
 }
 
-func (c ChallengeTwo) DataFolder() string {
+func (c Challenge02) DataFolder() string {
 	return "02"
 }

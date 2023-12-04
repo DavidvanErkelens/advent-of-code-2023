@@ -26,6 +26,24 @@ func NewRuneGrid(input string) Grid[rune] {
 	}
 }
 
+func NewIntGrid(input string, separator string) Grid[int] {
+	lines := common.SplitLines(input)
+	width := len(lines[0])
+	height := len(lines)
+
+	values := make([][]int, 0)
+
+	for _, line := range lines {
+		values = append(values, common.StringListOfNumericValuesToSlice(line, separator))
+	}
+
+	return Grid[int]{
+		Width:  width,
+		Height: height,
+		values: values,
+	}
+}
+
 func (g *Grid[T]) Lines() [][]T {
 	return g.values
 }

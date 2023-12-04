@@ -8,14 +8,14 @@ import (
 	"unicode"
 )
 
-func NewChallengeOne() ChallengeOne {
-	return ChallengeOne{}
+func NewChallenge01() Challenge01 {
+	return Challenge01{}
 }
 
-type ChallengeOne struct {
+type Challenge01 struct {
 }
 
-func (c ChallengeOne) RunPartOne(input string) string {
+func (c Challenge01) RunPartOne(input string) string {
 	lines := common.SplitLines(input)
 	numbers := make([]int, 0)
 
@@ -31,7 +31,7 @@ func (c ChallengeOne) RunPartOne(input string) string {
 	return strconv.Itoa(common.Sum(numbers))
 }
 
-func (c ChallengeOne) RunPartTwo(input string) string {
+func (c Challenge01) RunPartTwo(input string) string {
 	lines := common.SplitLines(input)
 	numbers := make([]int, 0)
 
@@ -80,6 +80,6 @@ func (c ChallengeOne) RunPartTwo(input string) string {
 	return strconv.Itoa(common.Sum(numbers))
 }
 
-func (c ChallengeOne) DataFolder() string {
+func (c Challenge01) DataFolder() string {
 	return "01"
 }
