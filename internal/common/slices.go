@@ -23,3 +23,13 @@ func Filter[T any](slice []T, filter func(T) bool) []T {
 
 	return out
 }
+
+func Map[TIn any, TOut any](slice []TIn, mapper func(TIn) TOut) []TOut {
+	out := make([]TOut, 0)
+
+	for _, elem := range slice {
+		out = append(out, mapper(elem))
+	}
+
+	return out
+}

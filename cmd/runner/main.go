@@ -7,11 +7,13 @@ import (
 )
 
 func main() {
-	challenge := challenges.NewChallengeTwo()
+	challenge := challenges.NewChallenge04()
 	fr := filereader.InputFileReader()
-	input := fr.GetFileDataOrPanic(challenge.DataFolder(), "nien.in")
+	input := fr.GetFileDataOrPanic(challenge.DataFolder(), "challenge.in")
 
-	output := challenge.RunPartOne(input)
+	outputOne := challenge.RunPartOne(input)
+	outputTwo := challenge.RunPartTwo(input)
 
-	fmt.Printf("Output is: %s\n", output)
+	fmt.Printf("Output of part 1 is: %s\n", outputOne)
+	fmt.Printf("Output of part 2 is: %s\n", outputTwo)
 }
