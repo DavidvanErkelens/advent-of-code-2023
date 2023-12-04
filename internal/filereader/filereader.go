@@ -57,3 +57,9 @@ func (reader *FileReader) GetFileDataOrPanic(dataFolder string, fileName string)
 	}
 	return data
 }
+
+func (reader *FileReader) FileExists(dataFolder string, fileName string) bool {
+	path := reader.getPath(dataFolder, fileName)
+	_, err := os.ReadFile(path)
+	return !os.IsNotExist(err)
+}

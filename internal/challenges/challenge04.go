@@ -23,34 +23,12 @@ func (c Challenge04) RunPartOne(input string) string {
 		configDataSplit := strings.Split(line, ":")
 		numbersSplit := strings.Split(configDataSplit[1], "|")
 
-		cardNumbersStrings := strings.Split(
-			strings.TrimSpace(numbersSplit[0]),
-			" ",
-		)
-		cardNumbers := common.Map(cardNumbersStrings, func(input string) int {
-			parsed, _ := strconv.Atoi(input)
-			return parsed
-		})
-		cardNumbers = common.Filter(cardNumbers, func(val int) bool {
-			return val > 0
-		})
+		cardNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[0], " ")
+		winningNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[1], " ")
 
-		winningNumbersStrings := strings.Split(
-			strings.TrimSpace(numbersSplit[1]),
-			" ",
-		)
-		winningNumbers := common.Map(winningNumbersStrings, func(input string) int {
-			parsed, _ := strconv.Atoi(input)
-			return parsed
-		})
-
-		winners := 0
-
-		for _, cardNumber := range cardNumbers {
-			if slices.Contains(winningNumbers, cardNumber) {
-				winners += 1
-			}
-		}
+		winners := common.Reduce(cardNumbers, func(cardNumber int, total int) int {
+			return total + common.BoolToInt(slices.Contains(winningNumbers, cardNumber))
+		}, 0)
 
 		if winners > 0 {
 			outcome := int(math.Pow(2, float64(winners-1)))
@@ -65,7 +43,7 @@ func (c Challenge04) RunPartTwo(input string) string {
 	lines := common.SplitLines(input)
 	numberOfCards := make(map[int]int, len(lines)+1)
 
-	for _, idx := range common.NewSlice(1, len(lines), 1) {
+	for _, idx := range common.NewRange(1, len(lines)) {
 		numberOfCards[idx] = 1
 	}
 
@@ -73,34 +51,12 @@ func (c Challenge04) RunPartTwo(input string) string {
 		configDataSplit := strings.Split(line, ":")
 		numbersSplit := strings.Split(configDataSplit[1], "|")
 
-		cardNumbersStrings := strings.Split(
-			strings.TrimSpace(numbersSplit[0]),
-			" ",
-		)
-		cardNumbers := common.Map(cardNumbersStrings, func(input string) int {
-			parsed, _ := strconv.Atoi(input)
-			return parsed
-		})
-		cardNumbers = common.Filter(cardNumbers, func(val int) bool {
-			return val > 0
-		})
+		cardNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[0], " ")
+		winningNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[1], " ")
 
-		winningNumbersStrings := strings.Split(
-			strings.TrimSpace(numbersSplit[1]),
-			" ",
-		)
-		winningNumbers := common.Map(winningNumbersStrings, func(input string) int {
-			parsed, _ := strconv.Atoi(input)
-			return parsed
-		})
-
-		winners := 0
-
-		for _, cardNumber := range cardNumbers {
-			if slices.Contains(winningNumbers, cardNumber) {
-				winners += 1
-			}
-		}
+		winners := common.Reduce(cardNumbers, func(cardNumber int, total int) int {
+			return total + common.BoolToInt(slices.Contains(winningNumbers, cardNumber))
+		}, 0)
 
 		if winners == 0 {
 			continue
@@ -109,7 +65,7 @@ func (c Challenge04) RunPartTwo(input string) string {
 		cardNumber := idx + 1
 		cardsForThisNumber := numberOfCards[cardNumber]
 
-		cardsToAdd := common.NewSlice(cardNumber+1, cardNumber+winners, 1)
+		cardsToAdd := common.NewRange(cardNumber+1, cardNumber+winners)
 
 		for _, extraCardIdx := range cardsToAdd {
 			numberOfCards[extraCardIdx] += cardsForThisNumber

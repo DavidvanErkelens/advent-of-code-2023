@@ -1,7 +1,6 @@
 package clock
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -15,7 +14,6 @@ func NewClock() Clock {
 	}
 }
 
-func (c *Clock) StopClock() {
-	runtime := time.Now().Sub(c.startTime)
-	fmt.Printf("Runtime: %dms (or %dμs)\n", runtime.Milliseconds(), runtime.Microseconds())
+func (c *Clock) StopClock() time.Duration {
+	return time.Since(c.startTime)
 }

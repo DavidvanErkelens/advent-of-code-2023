@@ -2,9 +2,17 @@ package common
 
 import "math"
 
+func NewPoint(x, y int) Point {
+	return Point{X: x, Y: y}
+}
+
 type Point struct {
 	X int
 	Y int
+}
+
+func NewPoint3D(x, y, z int) Point3D {
+	return Point3D{X: x, Y: y, Z: z}
 }
 
 type Point3D struct {

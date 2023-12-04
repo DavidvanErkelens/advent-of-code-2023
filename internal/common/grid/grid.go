@@ -1,4 +1,6 @@
-package common
+package grid
+
+import "advent-of-code-2023/internal/common"
 
 type Grid[T any] struct {
 	Width  int
@@ -6,8 +8,8 @@ type Grid[T any] struct {
 	values [][]T
 }
 
-func GridFromInput(input string) Grid[rune] {
-	lines := SplitLines(input)
+func NewRuneGrid(input string) Grid[rune] {
+	lines := common.SplitLines(input)
 	width := len(lines[0])
 	height := len(lines)
 

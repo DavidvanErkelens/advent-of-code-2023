@@ -1,6 +1,9 @@
 package common
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
 func SplitChunks(input string, length int) []string {
 	chunks := make([]string, 0)
@@ -23,4 +26,20 @@ func Reverse(s string) string {
 		runes[i], runes[j] = runes[j], runes[i]
 	}
 	return string(runes)
+}
+
+func NaiveStringToInt(s string) int {
+	value, err := strconv.Atoi(s)
+	if err != nil {
+		panic(err)
+	}
+	return value
+}
+
+func StringListOfNumericValuesToSlice(s string, separator string) []int {
+	splitValues := strings.Split(s, separator)
+	filtered := Filter(splitValues, func(val string) bool {
+		return strings.TrimSpace(val) != ""
+	})
+	return Map(filtered, NaiveStringToInt)
 }

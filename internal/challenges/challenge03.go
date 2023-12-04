@@ -2,6 +2,7 @@ package challenges
 
 import (
 	"advent-of-code-2023/internal/common"
+	"advent-of-code-2023/internal/common/grid"
 	"fmt"
 	"strconv"
 	"unicode"
@@ -15,7 +16,7 @@ type ChallengeThree struct {
 }
 
 func (c ChallengeThree) RunPartOne(input string) string {
-	grid := common.GridFromInput(input)
+	grid := grid.NewRuneGrid(input)
 	partNumbers := make([]int, 0)
 
 	for lineIdx, line := range grid.Lines() {
@@ -25,8 +26,8 @@ func (c ChallengeThree) RunPartOne(input string) string {
 		handleEndOfDigit := func(currentIdx int) {
 			digit := line[startIdx:currentIdx]
 
-			xRange := common.NewSlice(startIdx-1, currentIdx, 1)
-			yRange := common.NewSlice(lineIdx-1, lineIdx+1, 1)
+			xRange := common.NewRange(startIdx-1, currentIdx)
+			yRange := common.NewRange(lineIdx-1, lineIdx+1)
 
 			adjacentToSymbol := false
 			for _, x := range xRange {
@@ -78,7 +79,7 @@ func (c ChallengeThree) RunPartOne(input string) string {
 }
 
 func (c ChallengeThree) RunPartTwo(input string) string {
-	grid := common.GridFromInput(input)
+	grid := grid.NewRuneGrid(input)
 	adjacentToGears := make(map[string][]int, 0)
 
 	for lineIdx, line := range grid.Lines() {
@@ -88,8 +89,8 @@ func (c ChallengeThree) RunPartTwo(input string) string {
 		handleEndOfDigit := func(currentIdx int) {
 			digit := line[startIdx:currentIdx]
 
-			xRange := common.NewSlice(startIdx-1, currentIdx, 1)
-			yRange := common.NewSlice(lineIdx-1, lineIdx+1, 1)
+			xRange := common.NewRange(startIdx-1, currentIdx)
+			yRange := common.NewRange(lineIdx-1, lineIdx+1)
 
 			adjacentToSymbol := false
 			for _, x := range xRange {

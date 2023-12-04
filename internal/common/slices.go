@@ -1,6 +1,10 @@
 package common
 
-func NewSlice(start, end, step int) []int {
+func NewRange(start, end int) []int {
+	return NewRangeWithStep(start, end, 1)
+}
+
+func NewRangeWithStep(start, end, step int) []int {
 	if step <= 0 || end < start {
 		return []int{}
 	}
@@ -32,4 +36,14 @@ func Map[TIn any, TOut any](slice []TIn, mapper func(TIn) TOut) []TOut {
 	}
 
 	return out
+}
+
+func Reduce[TIn any, TOut any](slice []TIn, accumulator func(TIn, TOut) TOut, initial TOut) TOut {
+	value := initial
+
+	for _, elem := range slice {
+		value = accumulator(elem, value)
+	}
+
+	return value
 }

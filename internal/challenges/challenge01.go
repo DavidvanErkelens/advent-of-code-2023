@@ -47,7 +47,7 @@ func (c ChallengeOne) RunPartTwo(input string) string {
 		"nine":  9,
 	}
 
-	for _, val := range common.NewSlice(1, 9, 1) {
+	for _, val := range common.NewRange(1, 9) {
 		values[strconv.Itoa(val)] = val
 	}
 
