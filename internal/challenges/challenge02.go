@@ -1,7 +1,8 @@
 package challenges
 
 import (
-	"advent-of-code-2023/internal/common"
+	"advent-of-code-2023/internal/helpers"
+	"advent-of-code-2023/internal/helpers/aoc_math"
 	"strconv"
 	"strings"
 )
@@ -21,7 +22,7 @@ type Challenge02 struct {
 }
 
 func (c Challenge02) RunPartOne(input string) string {
-	games := common.SplitLines(input)
+	games := helpers.SplitLines(input)
 	possibleGames := make([]int, 0)
 
 	for _, game := range games {
@@ -54,13 +55,13 @@ func (c Challenge02) RunPartOne(input string) string {
 		}
 	}
 
-	sum := common.Sum(possibleGames)
+	sum := aoc_math.Sum(possibleGames)
 
 	return strconv.Itoa(sum)
 }
 
 func (c Challenge02) RunPartTwo(input string) string {
-	games := common.SplitLines(input)
+	games := helpers.SplitLines(input)
 	powers := make([]int, 0)
 
 	for _, game := range games {
@@ -92,7 +93,7 @@ func (c Challenge02) RunPartTwo(input string) string {
 		powers = append(powers, power)
 	}
 
-	return strconv.Itoa(common.Sum(powers))
+	return strconv.Itoa(aoc_math.Sum(powers))
 }
 
 func (c Challenge02) DataFolder() string {

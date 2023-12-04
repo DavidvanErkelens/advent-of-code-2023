@@ -1,7 +1,9 @@
 package challenges
 
 import (
-	"advent-of-code-2023/internal/common"
+	"advent-of-code-2023/internal/helpers"
+	math2 "advent-of-code-2023/internal/helpers/aoc_math"
+	"advent-of-code-2023/internal/helpers/aoc_range"
 	"math"
 	"strconv"
 	"strings"
@@ -16,23 +18,23 @@ type Challenge01 struct {
 }
 
 func (c Challenge01) RunPartOne(input string) string {
-	lines := common.SplitLines(input)
+	lines := helpers.SplitLines(input)
 	numbers := make([]int, 0)
 
 	for _, line := range lines {
 		chars := []rune(line)
-		digits := common.Filter(chars, unicode.IsDigit)
+		digits := helpers.Filter(chars, unicode.IsDigit)
 		num := []rune{digits[0], digits[len(digits)-1]}
 		value, _ := strconv.Atoi(string(num))
 
 		numbers = append(numbers, value)
 	}
 
-	return strconv.Itoa(common.Sum(numbers))
+	return strconv.Itoa(math2.Sum(numbers))
 }
 
 func (c Challenge01) RunPartTwo(input string) string {
-	lines := common.SplitLines(input)
+	lines := helpers.SplitLines(input)
 	numbers := make([]int, 0)
 
 	values := map[string]int{
@@ -47,7 +49,7 @@ func (c Challenge01) RunPartTwo(input string) string {
 		"nine":  9,
 	}
 
-	for _, val := range common.NewRange(1, 9) {
+	for _, val := range aoc_range.NewRange(1, 9) {
 		values[strconv.Itoa(val)] = val
 	}
 
@@ -57,7 +59,7 @@ func (c Challenge01) RunPartTwo(input string) string {
 
 		for search, value := range values {
 			if isReverse {
-				search = common.Reverse(search)
+				search = helpers.Reverse(search)
 			}
 			idx := strings.Index(line, search)
 			if idx >= 0 && idx < minIdx {
@@ -71,13 +73,13 @@ func (c Challenge01) RunPartTwo(input string) string {
 
 	for _, line := range lines {
 		firstNum := getFirstNumber(line, false)
-		lastNum := getFirstNumber(common.Reverse(line), true)
+		lastNum := getFirstNumber(helpers.Reverse(line), true)
 		value := firstNum*10 + lastNum
 
 		numbers = append(numbers, value)
 	}
 
-	return strconv.Itoa(common.Sum(numbers))
+	return strconv.Itoa(math2.Sum(numbers))
 }
 
 func (c Challenge01) DataFolder() string {

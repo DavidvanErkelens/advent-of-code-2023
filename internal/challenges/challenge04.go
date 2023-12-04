@@ -1,8 +1,9 @@
 package challenges
 
 import (
-	"advent-of-code-2023/internal/common"
-	"math"
+	"advent-of-code-2023/internal/helpers"
+	"advent-of-code-2023/internal/helpers/aoc_math"
+	"advent-of-code-2023/internal/helpers/aoc_range"
 	"slices"
 	"strconv"
 	"strings"
@@ -16,22 +17,22 @@ type Challenge04 struct {
 }
 
 func (c Challenge04) RunPartOne(input string) string {
-	lines := common.SplitLines(input)
+	lines := helpers.SplitLines(input)
 	scoreSums := 0
 
 	for _, line := range lines {
 		configDataSplit := strings.Split(line, ":")
 		numbersSplit := strings.Split(configDataSplit[1], "|")
 
-		cardNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[0], " ")
-		winningNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[1], " ")
+		cardNumbers := helpers.StringListOfNumericValuesToSlice(numbersSplit[0], " ")
+		winningNumbers := helpers.StringListOfNumericValuesToSlice(numbersSplit[1], " ")
 
-		winners := common.Reduce(cardNumbers, func(cardNumber int, total int) int {
-			return total + common.BoolToInt(slices.Contains(winningNumbers, cardNumber))
+		winners := helpers.Reduce(cardNumbers, func(cardNumber int, total int) int {
+			return total + helpers.BoolToInt(slices.Contains(winningNumbers, cardNumber))
 		}, 0)
 
 		if winners > 0 {
-			outcome := int(math.Pow(2, float64(winners-1)))
+			outcome := aoc_math.IntPow(2, winners-1)
 			scoreSums += outcome
 		}
 	}
@@ -40,10 +41,10 @@ func (c Challenge04) RunPartOne(input string) string {
 }
 
 func (c Challenge04) RunPartTwo(input string) string {
-	lines := common.SplitLines(input)
+	lines := helpers.SplitLines(input)
 	numberOfCards := make(map[int]int, len(lines)+1)
 
-	for _, idx := range common.NewRange(1, len(lines)) {
+	for _, idx := range aoc_range.NewRange(1, len(lines)) {
 		numberOfCards[idx] = 1
 	}
 
@@ -51,11 +52,11 @@ func (c Challenge04) RunPartTwo(input string) string {
 		configDataSplit := strings.Split(line, ":")
 		numbersSplit := strings.Split(configDataSplit[1], "|")
 
-		cardNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[0], " ")
-		winningNumbers := common.StringListOfNumericValuesToSlice(numbersSplit[1], " ")
+		cardNumbers := helpers.StringListOfNumericValuesToSlice(numbersSplit[0], " ")
+		winningNumbers := helpers.StringListOfNumericValuesToSlice(numbersSplit[1], " ")
 
-		winners := common.Reduce(cardNumbers, func(cardNumber int, total int) int {
-			return total + common.BoolToInt(slices.Contains(winningNumbers, cardNumber))
+		winners := helpers.Reduce(cardNumbers, func(cardNumber int, total int) int {
+			return total + helpers.BoolToInt(slices.Contains(winningNumbers, cardNumber))
 		}, 0)
 
 		if winners == 0 {
@@ -65,7 +66,7 @@ func (c Challenge04) RunPartTwo(input string) string {
 		cardNumber := idx + 1
 		cardsForThisNumber := numberOfCards[cardNumber]
 
-		cardsToAdd := common.NewRange(cardNumber+1, cardNumber+winners)
+		cardsToAdd := aoc_range.NewRange(cardNumber+1, cardNumber+winners)
 
 		for _, extraCardIdx := range cardsToAdd {
 			numberOfCards[extraCardIdx] += cardsForThisNumber

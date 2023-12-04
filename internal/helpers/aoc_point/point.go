@@ -1,6 +1,9 @@
-package common
+package aoc_point
 
-import "math"
+import (
+	math2 "advent-of-code-2023/internal/helpers/aoc_math"
+	"math"
+)
 
 func NewPoint(x, y int) Point {
 	return Point{X: x, Y: y}
@@ -22,7 +25,7 @@ type Point3D struct {
 }
 
 func (point *Point) ManhattanDistance(otherPoint Point) int {
-	return Abs(point.X-otherPoint.X) + Abs(point.Y-otherPoint.Y)
+	return math2.Abs(point.X-otherPoint.X) + math2.Abs(point.Y-otherPoint.Y)
 }
 
 func (point *Point) GradientTo(otherPoint Point) float64 {

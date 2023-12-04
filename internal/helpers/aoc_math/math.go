@@ -1,4 +1,6 @@
-package common
+package aoc_math
+
+import "math"
 
 func Abs(input int) int {
 	if input < 0 {
@@ -21,4 +23,8 @@ func Product(list []int) int {
 		total *= value
 	}
 	return total
+}
+
+func IntPow(base, power int) int {
+	return int(math.Pow(float64(base), float64(power)))
 }

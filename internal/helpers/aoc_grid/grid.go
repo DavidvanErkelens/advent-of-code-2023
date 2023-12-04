@@ -1,6 +1,6 @@
-package grid
+package aoc_grid
 
-import "advent-of-code-2023/internal/common"
+import "advent-of-code-2023/internal/helpers"
 
 type Grid[T any] struct {
 	Width  int
@@ -9,7 +9,7 @@ type Grid[T any] struct {
 }
 
 func NewRuneGrid(input string) Grid[rune] {
-	lines := common.SplitLines(input)
+	lines := helpers.SplitLines(input)
 	width := len(lines[0])
 	height := len(lines)
 
@@ -27,14 +27,14 @@ func NewRuneGrid(input string) Grid[rune] {
 }
 
 func NewIntGrid(input string, separator string) Grid[int] {
-	lines := common.SplitLines(input)
+	lines := helpers.SplitLines(input)
 	width := len(lines[0])
 	height := len(lines)
 
 	values := make([][]int, 0)
 
 	for _, line := range lines {
-		values = append(values, common.StringListOfNumericValuesToSlice(line, separator))
+		values = append(values, helpers.StringListOfNumericValuesToSlice(line, separator))
 	}
 
 	return Grid[int]{

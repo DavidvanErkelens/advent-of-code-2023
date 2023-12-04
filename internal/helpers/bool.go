@@ -1,4 +1,4 @@
-package common
+package helpers
 
 func BoolToInt(b bool) int {
 	if b {

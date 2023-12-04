@@ -1,8 +1,9 @@
 package challenges
 
 import (
-	"advent-of-code-2023/internal/common"
-	"advent-of-code-2023/internal/common/grid"
+	"advent-of-code-2023/internal/helpers/aoc_grid"
+	"advent-of-code-2023/internal/helpers/aoc_math"
+	"advent-of-code-2023/internal/helpers/aoc_range"
 	"fmt"
 	"strconv"
 	"unicode"
@@ -16,7 +17,7 @@ type Challenge03 struct {
 }
 
 func (c Challenge03) RunPartOne(input string) string {
-	grid := grid.NewRuneGrid(input)
+	grid := aoc_grid.NewRuneGrid(input)
 	partNumbers := make([]int, 0)
 
 	for lineIdx, line := range grid.Lines() {
@@ -26,8 +27,8 @@ func (c Challenge03) RunPartOne(input string) string {
 		handleEndOfDigit := func(currentIdx int) {
 			digit := line[startIdx:currentIdx]
 
-			xRange := common.NewRange(startIdx-1, currentIdx)
-			yRange := common.NewRange(lineIdx-1, lineIdx+1)
+			xRange := aoc_range.NewRange(startIdx-1, currentIdx)
+			yRange := aoc_range.NewRange(lineIdx-1, lineIdx+1)
 
 			adjacentToSymbol := false
 			for _, x := range xRange {
@@ -75,11 +76,11 @@ func (c Challenge03) RunPartOne(input string) string {
 		}
 	}
 
-	return strconv.Itoa(common.Sum(partNumbers))
+	return strconv.Itoa(aoc_math.Sum(partNumbers))
 }
 
 func (c Challenge03) RunPartTwo(input string) string {
-	grid := grid.NewRuneGrid(input)
+	grid := aoc_grid.NewRuneGrid(input)
 	adjacentToGears := make(map[string][]int, 0)
 
 	for lineIdx, line := range grid.Lines() {
@@ -89,8 +90,8 @@ func (c Challenge03) RunPartTwo(input string) string {
 		handleEndOfDigit := func(currentIdx int) {
 			digit := line[startIdx:currentIdx]
 
-			xRange := common.NewRange(startIdx-1, currentIdx)
-			yRange := common.NewRange(lineIdx-1, lineIdx+1)
+			xRange := aoc_range.NewRange(startIdx-1, currentIdx)
+			yRange := aoc_range.NewRange(lineIdx-1, lineIdx+1)
 
 			adjacentToSymbol := false
 			for _, x := range xRange {
@@ -150,7 +151,7 @@ func (c Challenge03) RunPartTwo(input string) string {
 		}
 	}
 
-	return strconv.Itoa(common.Sum(products))
+	return strconv.Itoa(aoc_math.Sum(products))
 }
 
 func (c Challenge03) DataFolder() string {
