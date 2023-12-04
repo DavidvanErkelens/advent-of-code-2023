@@ -140,5 +140,5 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/go,goland
 
 ## Advent of Code specific
-input/data/**/challenge.*
-!input/data/**/example.*
+input/**/challenge.*
+!input/**/example.*

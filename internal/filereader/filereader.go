@@ -6,7 +6,7 @@ import (
 )
 
 func InputFileReader() FileReader {
-	return FileReader{basePath: projectpath.Root + "/input/data/"}
+	return FileReader{basePath: projectpath.Root + "/input/"}
 }
 
 type FileReader struct {
