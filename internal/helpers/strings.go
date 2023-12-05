@@ -16,6 +16,10 @@ func SplitChunks(input string, length int) []string {
 	return chunks
 }
 
+func SplitParagraphs(input string) []string {
+	return strings.Split(input, "\n\n")
+}
+
 func SplitLines(input string) []string {
 	return strings.Split(input, "\n")
 }

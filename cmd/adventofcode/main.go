@@ -13,6 +13,7 @@ func main() {
 		challenges.NewChallenge02(),
 		challenges.NewChallenge03(),
 		challenges.NewChallenge04(),
+		challenges.NewChallenge05(),
 	}
 
 	totalTimer := clock.NewClock()
