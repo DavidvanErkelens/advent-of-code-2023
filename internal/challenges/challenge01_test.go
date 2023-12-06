@@ -16,7 +16,7 @@ func TestChallenge01_RunPartOne_ChallengeInput(t *testing.T) {
 
 func TestChallenge01_RunPartTwo_ExampleInput(t *testing.T) {
 	challenge := NewChallenge01()
-	RunChallengeTest(t, challenge.DataFolder(), "example.in", "example.2.out", challenge.RunPartTwo)
+	RunChallengeTest(t, challenge.DataFolder(), "example.2.in", "example.2.out", challenge.RunPartTwo)
 }
 
 func TestChallenge01_RunPartTwo_ChallengeInput(t *testing.T) {
