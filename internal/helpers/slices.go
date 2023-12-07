@@ -31,3 +31,13 @@ func Reduce[TIn any, TOut any](slice []TIn, accumulator func(TIn, TOut) TOut, in
 
 	return value
 }
+
+func ReduceWithIndex[TIn any, TOut any](slice []TIn, accumulator func(int, TIn, TOut) TOut, initial TOut) TOut {
+	value := initial
+
+	for idx, elem := range slice {
+		value = accumulator(idx, elem, value)
+	}
+
+	return value
+}
