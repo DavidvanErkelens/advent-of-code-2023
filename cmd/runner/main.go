@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-	challenge := challenges.NewChallenge07()
+	challenge := challenges.NewChallenge08()
 	fr := filereader.InputFileReader()
-	input := fr.GetFileDataOrPanic(challenge.DataFolder(), "example.in")
+	input := fr.GetFileDataOrPanic(challenge.DataFolder(), "challenge.in")
 
 	partOneClock := clock.NewClock()
 	outputOne := challenge.RunPartOne(input)
