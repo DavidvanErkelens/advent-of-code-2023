@@ -89,11 +89,7 @@ func (c Challenge08) RunPartTwo(input string) string {
 		currentNodes = nodesLeft
 	}
 
-	if len(zReached) > 2 {
-		return strconv.Itoa(aoc_math.LCM(zReached[0], zReached[1], zReached[2:]...))
-	}
-
-	return strconv.Itoa(aoc_math.LCM(zReached[0], zReached[1]))
+	return strconv.Itoa(aoc_math.LCM(zReached...))
 }
 
 func (c Challenge08) DataFolder() string {

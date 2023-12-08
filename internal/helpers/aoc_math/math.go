@@ -39,11 +39,14 @@ func GCD(a, b int) int {
 	return a
 }
 
-func LCM(a, b int, integers ...int) int {
+func LCM(values ...int) int {
+	a := values[0]
+	b := values[1]
+	rest := values[2:]
 	result := a * b / GCD(a, b)
 
-	for i := 0; i < len(integers); i++ {
-		result = LCM(result, integers[i])
+	for i := 0; i < len(rest); i++ {
+		result = LCM(result, rest[i])
 	}
 
 	return result
