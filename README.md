@@ -14,3 +14,4 @@ Last year's implementation is available [here](https://github.com/DavidvanErkele
 | 6   | ⭐⭐    |
 | 7   | ⭐⭐    |
 | 8   | ⭐⭐    |
+| 9   | ⭐⭐    |

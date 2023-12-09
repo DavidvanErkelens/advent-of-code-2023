@@ -41,3 +41,7 @@ func ReduceWithIndex[TIn any, TOut any](slice []TIn, accumulator func(int, TIn, 
 
 	return value
 }
+
+func GetLastElement[T any](s []T) T {
+	return s[len(s)-1]
+}
