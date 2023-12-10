@@ -45,3 +45,12 @@ func ReduceWithIndex[TIn any, TOut any](slice []TIn, accumulator func(int, TIn, 
 func GetLastElement[T any](s []T) T {
 	return s[len(s)-1]
 }
+
+func ContainsElement[T comparable](s []T, v T) bool {
+	for _, elem := range s {
+		if elem == v {
+			return true
+		}
+	}
+	return false
+}
