@@ -54,3 +54,22 @@ func ContainsElement[T comparable](s []T, v T) bool {
 	}
 	return false
 }
+
+func AllSatisfies[T comparable](s []T, check func(T) bool) bool {
+	for _, v := range s {
+		if !check(v) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func Insert[T any](a []T, index int, value T) []T {
+	if len(a) == index {
+		return append(a, value)
+	}
+	a = append(a[:index+1], a[index:]...)
+	a[index] = value
+	return a
+}

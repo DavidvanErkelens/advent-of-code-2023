@@ -93,10 +93,9 @@ func (c Challenge10) RunPartOne(input string) string {
 				continue
 			}
 
-			nextDest := grid.ElementAt(nextDestX, nextDestY)
-			nextDestElem := nextDest.Value
+			nextDest := grid.ValueAt(nextDestX, nextDestY)
 
-			if !helpers.ContainsElement(c.availableConnectors[dir], nextDestElem) {
+			if !helpers.ContainsElement(c.availableConnectors[dir], nextDest) {
 				continue
 			}
 
@@ -215,10 +214,9 @@ func (c Challenge10) RunPartTwo(input string) string {
 				continue
 			}
 
-			nextDest := grid.ElementAt(nextDestX, nextDestY)
-			nextDestElem := nextDest.Value
+			nextDest := grid.ValueAt(nextDestX, nextDestY)
 
-			if !helpers.ContainsElement(c.availableConnectors[dir], nextDestElem) {
+			if !helpers.ContainsElement(c.availableConnectors[dir], nextDest) {
 				continue
 			}
 

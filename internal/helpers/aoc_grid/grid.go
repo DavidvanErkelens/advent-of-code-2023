@@ -8,7 +8,6 @@ import (
 type Grid[T comparable] struct {
 	Width      int
 	Height     int
-	values     [][]GridPoint[T]
 	dataPoints [][]T
 }
 
@@ -23,27 +22,15 @@ func NewRuneGrid(input string) Grid[rune] {
 	width := len(lines[0])
 	height := len(lines)
 
-	values := make([][]GridPoint[rune], 0)
 	dataPoints := make([][]rune, 0)
 
-	for y, line := range lines {
-		runes := []rune(line)
-		points := make([]GridPoint[rune], 0)
-		for x, r := range runes {
-			points = append(points, GridPoint[rune]{
-				X:     x,
-				Y:     y,
-				Value: r,
-			})
-		}
-		values = append(values, points)
-		dataPoints = append(dataPoints, runes)
+	for _, line := range lines {
+		dataPoints = append(dataPoints, []rune(line))
 	}
 
 	return Grid[rune]{
 		Width:      width,
 		Height:     height,
-		values:     values,
 		dataPoints: dataPoints,
 	}
 }
@@ -52,24 +39,9 @@ func NewRuneGridFromParsedData(input [][]rune) Grid[rune] {
 	width := len(input[0])
 	height := len(input)
 
-	values := make([][]GridPoint[rune], 0)
-
-	for y, line := range input {
-		points := make([]GridPoint[rune], 0)
-		for x, r := range line {
-			points = append(points, GridPoint[rune]{
-				X:     x,
-				Y:     y,
-				Value: r,
-			})
-		}
-		values = append(values, points)
-	}
-
 	return Grid[rune]{
 		Width:      width,
 		Height:     height,
-		values:     values,
 		dataPoints: input,
 	}
 }
@@ -79,27 +51,16 @@ func NewIntGrid(input string, separator string) Grid[int] {
 	width := len(lines[0])
 	height := len(lines)
 
-	values := make([][]GridPoint[int], 0)
 	dataPoints := make([][]int, 0)
 
-	for y, line := range lines {
+	for _, line := range lines {
 		numbers := helpers.StringListOfNumericValuesToSlice(line, separator)
-		points := make([]GridPoint[int], 0)
-		for x, number := range numbers {
-			points = append(points, GridPoint[int]{
-				X:     x,
-				Y:     y,
-				Value: number,
-			})
-		}
-		values = append(values, points)
 		dataPoints = append(dataPoints, numbers)
 	}
 
 	return Grid[int]{
 		Width:      width,
 		Height:     height,
-		values:     values,
 		dataPoints: dataPoints,
 	}
 }
@@ -109,21 +70,11 @@ func (g *Grid[T]) Lines() [][]T {
 }
 
 func (g *Grid[T]) SetValueAt(x, y int, val T) {
-	g.values[y][x] = GridPoint[T]{
-		X:     x,
-		Y:     y,
-		Value: val,
-	}
-
 	g.dataPoints[y][x] = val
 }
 
 func (g *Grid[T]) ValueAt(x int, y int) T {
-	return g.values[y][x].Value
-}
-
-func (g *Grid[T]) ElementAt(x int, y int) GridPoint[T] {
-	return g.values[y][x]
+	return g.dataPoints[y][x]
 }
 
 func (g *Grid[T]) InRange(x int, y int) bool {
@@ -143,15 +94,32 @@ func (g *Grid[T]) InRange(x int, y int) bool {
 }
 
 func (g *Grid[T]) FindLocationOfValue(val T) (int, int) {
-	for y, line := range g.values {
+	for y, line := range g.dataPoints {
 		for x, value := range line {
-			if value.Value == val {
+			if value == val {
 				return x, y
 			}
 		}
 	}
 
 	return -1, -1
+}
+
+func (g *Grid[T]) FindAllLocationsOfValue(val T) []GridPoint[T] {
+	points := make([]GridPoint[T], 0)
+	for y, line := range g.dataPoints {
+		for x, value := range line {
+			if value == val {
+				points = append(points, GridPoint[T]{
+					X:     x,
+					Y:     y,
+					Value: value,
+				})
+			}
+		}
+	}
+
+	return points
 }
 
 func (g *Grid[T]) GetNeighbors(x, y int) []GridPoint[T] {
@@ -165,7 +133,11 @@ func (g *Grid[T]) GetNeighbors(x, y int) []GridPoint[T] {
 
 	for _, p := range toCheck {
 		if g.InRange(p.x, p.y) {
-			neighbors = append(neighbors, g.values[p.y][p.x])
+			neighbors = append(neighbors, GridPoint[T]{
+				X:     p.x,
+				Y:     p.y,
+				Value: g.dataPoints[p.y][p.x],
+			})
 		}
 	}
 
@@ -179,4 +151,22 @@ func (g *Grid[T]) Print(stringify func(T) string) {
 		}
 		fmt.Print("\n")
 	}
+}
+
+func (g *Grid[T]) InsertRowWithValue(at int, value T) {
+	valuesToInsert := make([]T, 0)
+
+	for i := 0; i < len(g.dataPoints[0]); i++ {
+		valuesToInsert = append(valuesToInsert, value)
+	}
+
+	g.dataPoints = helpers.Insert(g.dataPoints, at, valuesToInsert)
+	g.Height += 1
+}
+
+func (g *Grid[T]) InsertColumnWithValue(at int, value T) {
+	for i := 0; i < len(g.dataPoints); i++ {
+		g.dataPoints[i] = helpers.Insert(g.dataPoints[i], at, value)
+	}
+	g.Width += 1
 }
