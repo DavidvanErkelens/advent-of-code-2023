@@ -1,5 +1,10 @@
 package helpers
 
+import (
+	"strconv"
+	"strings"
+)
+
 func Filter[T any](slice []T, filter func(T) bool) []T {
 	out := make([]T, 0)
 
@@ -72,4 +77,10 @@ func Insert[T any](a []T, index int, value T) []T {
 	a = append(a[:index+1], a[index:]...)
 	a[index] = value
 	return a
+}
+
+func ToString(s []int) string {
+	return strings.Join(Map(s, func(in int) string {
+		return strconv.Itoa(in)
+	}), ",")
 }
