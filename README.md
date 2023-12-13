@@ -18,3 +18,4 @@ Last year's implementation is available [here](https://github.com/DavidvanErkele
 | 10  | ⭐⭐    | `19ms`                 |
 | 11  | ⭐⭐    | `20ms`                 |
 | 12  | ⭐⭐    | `187ms`                |
+| 13  | ⭐⭐    | `663μs`                |

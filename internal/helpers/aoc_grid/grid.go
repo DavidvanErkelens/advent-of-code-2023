@@ -170,3 +170,44 @@ func (g *Grid[T]) InsertColumnWithValue(at int, value T) {
 	}
 	g.Width += 1
 }
+
+func (g *Grid[T]) RowsHaveSameContents(rowOne, rowTwo int) bool {
+	for i := 0; i < g.Width; i++ {
+		if g.dataPoints[rowOne][i] != g.dataPoints[rowTwo][i] {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (g *Grid[T]) ColumnsHaveSameContents(colOne, colTwo int) bool {
+	for i := 0; i < g.Height; i++ {
+		if g.dataPoints[i][colOne] != g.dataPoints[i][colTwo] {
+			return false
+		}
+	}
+
+	return true
+}
+func (g *Grid[T]) DifferenceBetweenRows(rowOne, rowTwo int) int {
+	difference := 0
+	for i := 0; i < g.Width; i++ {
+		if g.dataPoints[rowOne][i] != g.dataPoints[rowTwo][i] {
+			difference += 1
+		}
+	}
+
+	return difference
+}
+
+func (g *Grid[T]) DifferenceBetweenColumns(colOne, colTwo int) int {
+	difference := 0
+	for i := 0; i < g.Height; i++ {
+		if g.dataPoints[i][colOne] != g.dataPoints[i][colTwo] {
+			difference += 1
+		}
+	}
+
+	return difference
+}
