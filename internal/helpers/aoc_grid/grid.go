@@ -153,6 +153,16 @@ func (g *Grid[T]) Print(stringify func(T) string) {
 	}
 }
 
+func (g *Grid[T]) AsSingleLineString(stringify func(T) string) string {
+	result := ""
+	for _, line := range g.Lines() {
+		for _, value := range line {
+			result += stringify(value)
+		}
+	}
+	return result
+}
+
 func (g *Grid[T]) InsertRowWithValue(at int, value T) {
 	valuesToInsert := make([]T, 0)
 
