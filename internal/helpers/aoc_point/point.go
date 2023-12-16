@@ -24,6 +24,11 @@ type Point3D struct {
 	Z int
 }
 
+func (point *Point) ApplyTranslation(dx, dy int) {
+	point.X += dx
+	point.Y += dy
+}
+
 func (point *Point) ManhattanDistance(otherPoint Point) int {
 	return math2.Abs(point.X-otherPoint.X) + math2.Abs(point.Y-otherPoint.Y)
 }

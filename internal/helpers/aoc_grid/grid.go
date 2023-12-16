@@ -17,6 +17,30 @@ type GridPoint[T comparable] struct {
 	Value T
 }
 
+type Direction int
+
+const (
+	Up Direction = iota
+	Down
+	Left
+	Right
+)
+
+func (d Direction) GetTranslation() (int, int) {
+	switch d {
+	case Up:
+		return 0, -1
+	case Down:
+		return 0, 1
+	case Left:
+		return -1, 0
+	case Right:
+		return 1, 0
+	default:
+		panic("unhandled default case")
+	}
+}
+
 func NewRuneGrid(input string) Grid[rune] {
 	lines := helpers.SplitLines(input)
 	width := len(lines[0])
@@ -58,6 +82,18 @@ func NewIntGrid(input string, separator string) Grid[int] {
 		dataPoints = append(dataPoints, numbers)
 	}
 
+	return Grid[int]{
+		Width:      width,
+		Height:     height,
+		dataPoints: dataPoints,
+	}
+}
+
+func NewEmptyIntGrid(width, height int) Grid[int] {
+	dataPoints := make([][]int, height)
+	for i := 0; i < width; i++ {
+		dataPoints[i] = make([]int, width)
+	}
 	return Grid[int]{
 		Width:      width,
 		Height:     height,
