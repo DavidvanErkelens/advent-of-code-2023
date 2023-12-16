@@ -84,3 +84,7 @@ func ToString(s []int) string {
 		return strconv.Itoa(in)
 	}), ",")
 }
+
+func RemoveIndex[T any](s []T, idx int) []T {
+	return append(s[:idx], s[idx+1:]...)
+}

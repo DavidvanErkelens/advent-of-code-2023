@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	challenge := challenges.NewChallenge14()
+	challenge := challenges.NewChallenge15()
 	fr := filereader.InputFileReader()
 	input := fr.GetFileDataOrPanic(challenge.DataFolder(), "challenge.in")
 
