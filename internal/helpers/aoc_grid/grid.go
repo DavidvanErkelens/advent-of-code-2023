@@ -2,6 +2,7 @@ package aoc_grid
 
 import (
 	"advent-of-code-2023/internal/helpers"
+	"advent-of-code-2023/internal/helpers/aoc_point"
 	"fmt"
 )
 
@@ -89,10 +90,13 @@ func NewIntGrid(input string, separator string) Grid[int] {
 	}
 }
 
-func NewEmptyIntGrid(width, height int) Grid[int] {
+func NewEmptyIntGrid(width, height, initialValue int) Grid[int] {
 	dataPoints := make([][]int, height)
 	for i := 0; i < width; i++ {
 		dataPoints[i] = make([]int, width)
+		for j := range dataPoints[i] {
+			dataPoints[i][j] = initialValue
+		}
 	}
 	return Grid[int]{
 		Width:      width,
@@ -113,6 +117,10 @@ func (g *Grid[T]) ValueAt(x int, y int) T {
 	return g.dataPoints[y][x]
 }
 
+func (g *Grid[T]) ValueAtPoint(point aoc_point.Point) T {
+	return g.dataPoints[point.Y][point.X]
+}
+
 func (g *Grid[T]) InRange(x int, y int) bool {
 	if x < 0 || y < 0 {
 		return false
@@ -127,6 +135,10 @@ func (g *Grid[T]) InRange(x int, y int) bool {
 	}
 
 	return true
+}
+
+func (g *Grid[T]) PointInRange(point aoc_point.Point) bool {
+	return g.InRange(point.X, point.Y)
 }
 
 func (g *Grid[T]) FindLocationOfValue(val T) (int, int) {
@@ -184,6 +196,15 @@ func (g *Grid[T]) Print(stringify func(T) string) {
 	for _, line := range g.Lines() {
 		for _, value := range line {
 			fmt.Print(stringify(value))
+		}
+		fmt.Print("\n")
+	}
+}
+
+func (g *Grid[T]) PrintIndexFn(stringify func(T, int, int) string) {
+	for y, line := range g.Lines() {
+		for x, value := range line {
+			fmt.Print(stringify(value, x, y))
 		}
 		fmt.Print("\n")
 	}

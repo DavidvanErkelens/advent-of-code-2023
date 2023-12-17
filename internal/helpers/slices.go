@@ -79,6 +79,15 @@ func Insert[T any](a []T, index int, value T) []T {
 	return a
 }
 
+func FindIndex[T comparable](a []T, val T) int {
+	for i, elem := range a {
+		if elem == val {
+			return i
+		}
+	}
+	return -1
+}
+
 func ToString(s []int) string {
 	return strings.Join(Map(s, func(in int) string {
 		return strconv.Itoa(in)

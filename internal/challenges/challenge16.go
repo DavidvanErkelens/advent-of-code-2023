@@ -23,7 +23,7 @@ func (b *beam) nextStep() {
 }
 
 func getEnergizedTilesForStartPosition(grid aoc_grid.Grid[rune], start aoc_point.Point, direction aoc_grid.Direction) int {
-	energizedGrid := aoc_grid.NewEmptyIntGrid(grid.Width, grid.Height)
+	energizedGrid := aoc_grid.NewEmptyIntGrid(grid.Width, grid.Height, 0)
 	energizedValues := 1
 
 	seen := make(map[string]interface{})
