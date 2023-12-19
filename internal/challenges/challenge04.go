@@ -44,7 +44,7 @@ func (c Challenge04) RunPartTwo(input string) string {
 	lines := helpers.SplitLines(input)
 	numberOfCards := make(map[int]int, len(lines)+1)
 
-	for _, idx := range aoc_range.NewRange(1, len(lines)) {
+	for _, idx := range aoc_range.NewRangeSlice(1, len(lines)) {
 		numberOfCards[idx] = 1
 	}
 
@@ -66,7 +66,7 @@ func (c Challenge04) RunPartTwo(input string) string {
 		cardNumber := idx + 1
 		cardsForThisNumber := numberOfCards[cardNumber]
 
-		cardsToAdd := aoc_range.NewRange(cardNumber+1, cardNumber+winners)
+		cardsToAdd := aoc_range.NewRangeSlice(cardNumber+1, cardNumber+winners)
 
 		for _, extraCardIdx := range cardsToAdd {
 			numberOfCards[extraCardIdx] += cardsForThisNumber

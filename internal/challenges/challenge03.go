@@ -27,8 +27,8 @@ func (c Challenge03) RunPartOne(input string) string {
 		handleEndOfDigit := func(currentIdx int) {
 			digit := line[startIdx:currentIdx]
 
-			xRange := aoc_range.NewRange(startIdx-1, currentIdx)
-			yRange := aoc_range.NewRange(lineIdx-1, lineIdx+1)
+			xRange := aoc_range.NewRangeSlice(startIdx-1, currentIdx)
+			yRange := aoc_range.NewRangeSlice(lineIdx-1, lineIdx+1)
 
 			adjacentToSymbol := false
 			for _, x := range xRange {
@@ -90,8 +90,8 @@ func (c Challenge03) RunPartTwo(input string) string {
 		handleEndOfDigit := func(currentIdx int) {
 			digit := line[startIdx:currentIdx]
 
-			xRange := aoc_range.NewRange(startIdx-1, currentIdx)
-			yRange := aoc_range.NewRange(lineIdx-1, lineIdx+1)
+			xRange := aoc_range.NewRangeSlice(startIdx-1, currentIdx)
+			yRange := aoc_range.NewRangeSlice(lineIdx-1, lineIdx+1)
 
 			adjacentToSymbol := false
 			for _, x := range xRange {

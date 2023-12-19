@@ -49,7 +49,7 @@ func (c Challenge01) RunPartTwo(input string) string {
 		"nine":  9,
 	}
 
-	for _, val := range aoc_range.NewRange(1, 9) {
+	for _, val := range aoc_range.NewRangeSlice(1, 9) {
 		values[strconv.Itoa(val)] = val
 	}
 

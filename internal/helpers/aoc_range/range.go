@@ -1,10 +1,10 @@
 package aoc_range
 
-func NewRange(start, end int) []int {
-	return NewRangeWithStep(start, end, 1)
+func NewRangeSlice(start, end int) []int {
+	return NewRangeSliceWithStep(start, end, 1)
 }
 
-func NewRangeWithStep(start, end, step int) []int {
+func NewRangeSliceWithStep(start, end, step int) []int {
 	if step <= 0 || end < start {
 		return []int{}
 	}
@@ -14,4 +14,25 @@ func NewRangeWithStep(start, end, step int) []int {
 		start += step
 	}
 	return s
+}
+
+func NewRange(Start, End int, inclusiveEnd bool) Range {
+	return Range{
+		Start:        Start,
+		End:          End,
+		inclusiveEnd: inclusiveEnd,
+	}
+}
+
+type Range struct {
+	Start        int
+	End          int
+	inclusiveEnd bool
+}
+
+func (r Range) Length() int {
+	if r.inclusiveEnd {
+		return r.End - r.Start + 1
+	}
+	return r.End - r.Start
 }
