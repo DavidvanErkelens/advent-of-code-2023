@@ -60,6 +60,21 @@ func NewRuneGrid(input string) Grid[rune] {
 	}
 }
 
+func NewEmptyRuneGrid(width, height int, initialValue rune) Grid[rune] {
+	dataPoints := make([][]rune, height)
+	for i := 0; i < width; i++ {
+		dataPoints[i] = make([]rune, width)
+		for j := range dataPoints[i] {
+			dataPoints[i][j] = initialValue
+		}
+	}
+	return Grid[rune]{
+		Width:      width,
+		Height:     height,
+		dataPoints: dataPoints,
+	}
+}
+
 func NewRuneGridFromParsedData(input [][]rune) Grid[rune] {
 	width := len(input[0])
 	height := len(input)

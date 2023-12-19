@@ -97,3 +97,11 @@ func ToString(s []int) string {
 func RemoveIndex[T any](s []T, idx int) []T {
 	return append(s[:idx], s[idx+1:]...)
 }
+
+func Reversed[T any](s []T) []T {
+	ns := make([]T, len(s))
+	for i := 0; i < len(s); i++ {
+		ns[len(s)-1-i] = s[i]
+	}
+	return ns
+}
